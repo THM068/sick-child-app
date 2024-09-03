@@ -1,6 +1,8 @@
 package sick.child
 import io.getquill._
 import io.getquill.jdbczio.Quill
+import sick.child.routes.NotFoundRoute
+import sick.child.server.AppServer
 import zio.Console.ConsoleLive.printLine
 import zio._
 
@@ -39,14 +41,19 @@ object Main extends ZIOAppDefault {
     val dataSourceLive  = Quill.DataSource.fromPrefix("quill")
     val postgresLive    = Quill.Postgres.fromNamingStrategy(Literal)
 
-
-
-
   override def run =
     (for {
       emails      <- Application.getAccountsByEmail("thando.mafela@gmail.com")
       _         <- printLine(emails)
       allAccounts <- Application.getAllAccounts()
       _         <- printLine(allAccounts)
-    } yield ()).provide(applicationLive, dataServiceLive, dataSourceLive, postgresLive)
+      _ <- ZIO.serviceWithZIO[AppServer](_.runServer())
+    } yield ())
+      .provide(
+        AppServer.layer,
+        NotFoundRoute.layer,
+        applicationLive,
+        dataServiceLive,
+        dataSourceLive,
+        postgresLive)
 }

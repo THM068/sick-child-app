@@ -9,6 +9,8 @@ I hope you enjoy this journey of learing zio http and quill.
 Importing the world database.
 1. Download the world.sql file to your computer.
 2. Log into postgres via the command line and create a database called world.
-4. Run the command \i world.sql. This will create a database and import all
+3. Run the command \c **world** to select the world database.
+4. Run the command \i world.sql. This will create  all
    the database table.
-3. Update the application.conf to have your database 
+5. Update the application.conf to have your database credentials
+6. Run the application 

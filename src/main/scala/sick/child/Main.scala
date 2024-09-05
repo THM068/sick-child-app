@@ -1,16 +1,11 @@
 package sick.child
-import html.CityView
 import io.getquill._
 import io.getquill.jdbczio.Quill
-import sick.child.repository.city.{CityRepository, CityRepositoryLive, CityService}
+import sick.child.repository.city.{CityRepository, CityRepositoryLive}
 import sick.child.routes.{AssetRoutes, CityRoutes}
-//import sick.child.repository.DataApplication.{dataSourceLive, postgresLive}
 import sick.child.routes.NotFoundRoute
 import sick.child.server.AppServer
-import zio.Console.ConsoleLive.printLine
 import zio._
-
-import java.sql.SQLException
 
 
 object Main extends ZIOAppDefault {

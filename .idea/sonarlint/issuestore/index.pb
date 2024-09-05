@@ -32,3 +32,13 @@ S
 #src/main/twirl/IndexPage.scala.html,e/0/e0c305e6e612442b13f044241d7b8aea3b96e26e
 b
 2src/main/scala/sick/child/routes/AssetRoutes.scala,1/c/1ce4537b5a366609a50bceb28e930af45d95ed6c
+n
+>src/main/scala/sick/child/repository/city/CityRepository.scala,d/8/d8b2e3cc573de502aa3b88f65f637e8577eaae39
+r
+Bsrc/main/scala/sick/child/repository/city/CityRepositoryLive.scala,e/5/e530b9f8cfe532ed23c606d484aea8bd5f1f8663
+k
+;src/main/scala/sick/child/repository/city/CityService.scala,9/5/9576a5fd99f59f2f5313d435ac4325e642e0ee64
+R
+"src/main/twirl/CityView.scala.html,c/d/cdd2fd7e405d9ff324dd8133b387775189f8681d
+a
+1src/main/scala/sick/child/routes/CityRoutes.scala,f/4/f4f00b4bce0ecb6517121f2119be683dd334f845

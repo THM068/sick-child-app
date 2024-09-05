@@ -1,0 +1,12 @@
+@import sick.child.City
+@import html.main
+@(cities: List[City], title: String = "Cities")
+
+
+@main(title) {
+  <ul>
+      @for(city <- cities) {
+        <li>@city.name</li>
+      }
+  </ul>
+}

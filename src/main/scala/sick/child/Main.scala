@@ -1,6 +1,7 @@
 package sick.child
 import io.getquill._
 import io.getquill.jdbczio.Quill
+//import sick.child.repository.DataApplication.{dataSourceLive, postgresLive}
 import sick.child.routes.NotFoundRoute
 import sick.child.server.AppServer
 import zio.Console.ConsoleLive.printLine
@@ -15,25 +16,25 @@ object Main extends ZIOAppDefault {
 
     import quill._
 
-    val accounts = quote(query[Account])
+    val cities = quote(query[City])
 
-    def accountsByEmail = quote((email: String) => accounts.filter(acc => acc.email == email))
+    def citiesByName = quote((name: String) => cities.filter(city => city.name == name))
   }
 
   case class ApplicationLive(dataService: DataService) {
     import dataService.quill
     import dataService.quill._
 
-    def getAccountsByEmail(email: String): ZIO[Any, SQLException, List[Account]] =
-      quill.run(dataService.accountsByEmail(lift(email)))
+    def getCityByName(name: String): ZIO[Any, SQLException, List[City]] =
+      quill.run(dataService.citiesByName(lift(name)))
 
-    def getAllAccounts(): ZIO[Any, SQLException, List[Account]] = quill.run(dataService.accounts)
+    def getAllCities(): ZIO[Any, SQLException, List[City]] = quill.run(dataService.cities)
   }
 
   object Application {
-    def getAccountsByEmail(email: String) = ZIO.serviceWithZIO[ApplicationLive](_.getAccountsByEmail(email))
+    def getCityByName(name: String) = ZIO.serviceWithZIO[ApplicationLive](_.getCityByName(name))
 
-    def getAllAccounts() = ZIO.serviceWithZIO[ApplicationLive](_.getAllAccounts())
+    def getAllCities() = ZIO.serviceWithZIO[ApplicationLive](_.getAllCities())
   }
 
     val dataServiceLive = ZLayer.fromFunction(DataService.apply _)
@@ -43,10 +44,10 @@ object Main extends ZIOAppDefault {
 
   override def run =
     (for {
-      emails      <- Application.getAccountsByEmail("thando.mafela@gmail.com")
-      _         <- printLine(emails)
-      allAccounts <- Application.getAllAccounts()
-      _         <- printLine(allAccounts)
+      city      <- Application.getCityByName("Zaanstad")
+      _         <- printLine(city)
+      allCities <- Application.getAllCities()
+      _         <- printLine(allCities.take(10))
       _ <- ZIO.serviceWithZIO[AppServer](_.runServer())
     } yield ())
       .provide(
@@ -55,5 +56,6 @@ object Main extends ZIOAppDefault {
         applicationLive,
         dataServiceLive,
         dataSourceLive,
-        postgresLive)
+        postgresLive,
+        ZLayer.Debug.mermaid)
 }

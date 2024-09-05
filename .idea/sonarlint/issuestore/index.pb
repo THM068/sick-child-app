@@ -24,3 +24,7 @@ R
 .src/main/twirl/templates/navigation.scala.html,2/1/217146aec088ba9cd9856a98a9d8a25002aaa06e
 9
 	world.sql,b/7/b75a3ac1c851ba47d2b7231c504e34800f95945e
+[
++src/main/scala/sick/child/model/Model.scala,9/c/9c563acdc53e7c6676632d330f1764e3d1c30851
+j
+:src/main/scala/sick/child/repository/DataApplication.scala,0/8/08be87ca4fafca942fb62efbae316f76545dce62

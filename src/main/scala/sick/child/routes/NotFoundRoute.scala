@@ -1,8 +1,9 @@
 package sick.child.routes
 import html.notFound
+import sick.child.server.renderer.ViewRenderer
 import sick.child.server.renderer.ViewRenderer.render
 import zio.ZLayer
-import zio.http.{HttpApp, Response, RoutePattern, Routes, Status, handler}
+import zio.http.{HttpApp, Method, Response, RoutePattern, Routes, Status, handler}
 
 class NotFoundRoute {
   val notFoundRoute = RoutePattern.any -> handler {
@@ -10,7 +11,13 @@ class NotFoundRoute {
     render(content.body,Response.notFound.status)
   }
 
-  val apps: HttpApp[Any] = Routes(notFoundRoute)
+  val index = Method.GET / "" -> handler {
+    val content = html.IndexPage(List("Apple", "Oranges", "Mangoes"), "Home")
+    ViewRenderer.render(content.body)
+  }
+
+
+  val apps: HttpApp[Any] = Routes(index,notFoundRoute)
     .handleError { t: Throwable => Response.text("The error is " + t).status(Status
       .InternalServerError) }
     .toHttpApp

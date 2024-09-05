@@ -28,3 +28,7 @@ R
 +src/main/scala/sick/child/model/Model.scala,9/c/9c563acdc53e7c6676632d330f1764e3d1c30851
 j
 :src/main/scala/sick/child/repository/DataApplication.scala,0/8/08be87ca4fafca942fb62efbae316f76545dce62
+S
+#src/main/twirl/IndexPage.scala.html,e/0/e0c305e6e612442b13f044241d7b8aea3b96e26e
+b
+2src/main/scala/sick/child/routes/AssetRoutes.scala,1/c/1ce4537b5a366609a50bceb28e930af45d95ed6c

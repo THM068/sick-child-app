@@ -1,13 +1,12 @@
 package sick.child.server
 
-import sick.child.routes.NotFoundRoute
+import sick.child.routes.{AssetRoutes, NotFoundRoute}
 import zio.http.{Middleware, Path, Routes, Server}
 import zio.{ZIO, ZLayer}
 
-case class AppServer (notFoundRoute: NotFoundRoute) {
-  val serveResourcesApp = Routes.empty.toHttpApp @@  Middleware.serveResources(Path.empty / "static")
+case class AppServer (notFoundRoute: NotFoundRoute, assetRoute: AssetRoutes) {
 
-  val apps =  serveResourcesApp ++ notFoundRoute.apps
+  val apps =   assetRoute.apps ++ notFoundRoute.apps
   val port = 9998
 
   def runServer(): ZIO[Any, Throwable, Unit] = for {
@@ -19,5 +18,5 @@ case class AppServer (notFoundRoute: NotFoundRoute) {
 }
 
 object AppServer {
-  val layer: ZLayer[NotFoundRoute, Nothing, AppServer] = ZLayer.fromFunction(AppServer.apply _)
+  val layer: ZLayer[AssetRoutes with NotFoundRoute, Nothing, AppServer] = ZLayer.fromFunction(AppServer.apply _)
 }

@@ -1,6 +1,7 @@
 package sick.child
 import io.getquill._
 import io.getquill.jdbczio.Quill
+import sick.child.routes.AssetRoutes
 //import sick.child.repository.DataApplication.{dataSourceLive, postgresLive}
 import sick.child.routes.NotFoundRoute
 import sick.child.server.AppServer
@@ -53,6 +54,7 @@ object Main extends ZIOAppDefault {
       .provide(
         AppServer.layer,
         NotFoundRoute.layer,
+        AssetRoutes.layer,
         applicationLive,
         dataServiceLive,
         dataSourceLive,
